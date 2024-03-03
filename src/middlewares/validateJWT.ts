@@ -22,8 +22,12 @@ export const validateJWT = (req: Request, res: Response, next: NextFunction) => 
   try {
     
     const { name, uid } = verify( token, process.env.SECRET_JWT_SEED! ) as IPayload;
-    req.body.uid = uid;
-    req.body.name = name;
+    // req.body.uid = uid;
+    // req.body.name = name;
+    req.body.user = {
+      uid,
+      name
+    };
 
   } catch (error) {
     return res.status(401).json({

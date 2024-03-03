@@ -4,13 +4,13 @@
 */
 
 import express from 'express';
-import { loginUser, newUser, revalidateToken } from '../controllers/auth';
+import { loginUser, newUser, revalidateToken } from '../controllers';
 import { check } from 'express-validator';
 import { fieldValidator, validateJWT } from '../middlewares';
 
-const router = express.Router();
+export const authRouter = express.Router();
 
-router.post(
+authRouter.post(
   '/', 
   [ /* middlewares */
     check('email', 'El email es obligatorio').isEmail(),
@@ -20,7 +20,7 @@ router.post(
   loginUser
 );
   
-router.post(
+authRouter.post(
     '/new', 
     [ /* middlewares */
       check('name', 'El nombre es obligatorio').not().isEmpty(),
@@ -31,10 +31,8 @@ router.post(
   newUser
 );
 
-router.get(
+authRouter.get(
   '/revalidate',
   validateJWT,
   revalidateToken
 );
-
-module.exports = router;

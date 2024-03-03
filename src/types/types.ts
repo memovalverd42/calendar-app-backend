@@ -9,4 +9,16 @@ export interface LoginUser {
   password: string;
 }
 
+export interface IEvent {
+  _id?: string;
+  title: string;
+  notes?: string;
+  start: Date;
+  end: Date;
+  user: IUser;
+}
 
+export interface IUser {
+  uid: string;
+  name: string;
+}

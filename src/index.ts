@@ -1,6 +1,7 @@
 import express from 'express';
 import { dbConection } from './database/config';
 import cors from 'cors';
+import { authRouter, eventsRouter } from './routes';
 require('dotenv').config();
 
 // Crear el servidor de express
@@ -19,7 +20,8 @@ app.use( express.static('public') );
 app.use( express.json() );
 
 // Rutas
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', authRouter);     // Rutas de autenticación
+app.use('/api/events', eventsRouter); // Rutas de eventos
 
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
